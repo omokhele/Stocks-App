@@ -1,23 +1,17 @@
-import logo from './logo.svg';
 import './App.css';
+import fruitList from './components/Data'
+import FruitContainer from './components/FruitContainer'
+
+// component that lists the fruit. This will need array of fruits to display
+// input to capture filter value from user.This will need one piect of data, the current value of the filter
+
+//State will hold the filtered list of fruits
+// Value of the filter
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <FruitContainer fruits={fruitList}/>
     </div>
   );
 }
