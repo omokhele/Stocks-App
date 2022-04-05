@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { CLIENT_URL}  from '../services/constants';
-import Header from './Header'
+import { CLIENT_URL }  from '../services/constants';
+import List from './List'
 
 function Stocks () {
     
@@ -18,42 +18,40 @@ function Stocks () {
     const syms = ['FB', 'aapl' , 'snap', 'NDAQ'];
     useEffect(() => {
         const fetchData = async (item) => { 
-            
-                         
-                   
+             
             try{
-                const response = await axios.get(`${CLIENT_URL}${item}${key}`);
-                console.log(response.data) 
-                const result = []
-                result.push(response.data);
+                const response = await axios.get(`${CLIENT_URL}${item}${key}`); 
+                const result = response.data
+                console.log(result)
                 setStockDatas((prevState) => prevState.concat(result));
                 // setSymbol(symbol);
             }catch(error) {
                 console.log(error)
             }
         }
-        const item = syms.map(fetchData); 
-                console.log(item) 
+        const items = syms.map(fetchData); 
+                console.log(items) 
         console.log("running...")
     },[])
-
-    
 
     return (
        <div>
 
            
-           <h1> Stocks </h1>
+           {/* <h1> Stocks </h1> */}
            {
 
                
                (stockDatas || []).map((stockData, index) => {
-                   const { symbol, companyName, latestPrice, ytdChange } = stockData;
-                return (<Header 
+                   const { symbol, companyName, primaryExchange, latestPrice, high, low, marketCap } = stockData;
+                return (<List 
                     symbol= {symbol} 
                     companyName = {companyName} 
+                    primaryExchange = {primaryExchange} 
                     latestPrice = {latestPrice} 
-                    ytdChange = {ytdChange} 
+                    high = {high} 
+                    low = {low} 
+                    marketCap = {marketCap} 
                     key={index}
                     />);
                })
